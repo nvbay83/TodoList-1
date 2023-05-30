@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Cài đặt chung" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="animation"
+        android:summary="Bật hiệu ứng cho thành phần Giao diện"
+        android:title="Bật hiệu ứng" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="general_notification"
+        android:summary="Hiển thị thông báo chung với danh sách tác vụ hiện tại của bạn"
+        android:title="Bật thông báo chung" />
+    <RingtonePreference
+        android:defaultValue="content://settings/system/notification_sound"
+        android:key="notification_sound"
+        android:ringtoneType="notification"
+        android:showDefault="true"
+        android:showSilent="true"
+        android:summary="Cài đặt chuông thông báo"
+        android:title="Chuông thông báo" />
+    <Preference
+        android:defaultValue="true"
+        android:key="date_format"
+        android:summary="Thay đổi định dạng ngày"
+        android:title="Định dạng ngày" />
+    <PreferenceCategory android:title="Giới thiệu" />
+    <Preference
+        android:key="about_version"
+        android:summary="1.0"
+        android:title="Phiên bản" />
+</PreferenceScreen>
