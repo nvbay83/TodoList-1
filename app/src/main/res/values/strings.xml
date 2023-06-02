@@ -1,17 +1,17 @@
 <resources>
     <string name="app_name">Simple ToDo</string>
     <string name="simple_todo_title">SIMPLE TODO</string>
-    <string name="empty_view_title">Không có tác vụ</string>
-    <string name="empty_view_text">Bạn có thể tạo tác vụ mới. Nhấn nút + để tạo tác vụ</string>
-    <string name="create_task">TÁC VỤ MỚI</string>
+    <string name="empty_view_title">Không có ghi chú</string>
+    <string name="empty_view_text">Bạn có thể tạo ghi chú mới. Nhấn nút + để tạo ghi chú</string>
+    <string name="create_task">GHI CHÚ MỚI</string>
     <string name="set_reminder">Set reminder</string>
     <string name="set_reminder_short">Nhắc nhở</string>
     <string name="hint_title">Tiêu đề</string>
     <string name="hint_date">Date</string>
     <string name="hint_time">Time</string>
-    <string name="add_task">THÊM TÁC VỤ</string>
-    <string name="update_task">CẬP NHẬT TÁC VỤ</string>
-    <string name="edit_task">CHỈNH SỬA TÁC VỤ</string>
+    <string name="add_task">THÊM GHI CHÚ</string>
+    <string name="update_task">CẬP NHẬT GHI CHÚ</string>
+    <string name="edit_task">CHỈNH SỬA GHI CHÚ</string>
 
     <string name="toast_incorrect_time">Lỗi! Bạn đã chọn sai thời gian!</string>
     <string name="error_text_input">Xin vui lòng, nhập văn bản!</string>
@@ -60,12 +60,12 @@
     <string name="reminder_tomorrow">Ngày mai vào lúc</string>
     <string name="licenses_circular_anim_summary">This software distributed without a license</string>
 
-    <string name="snackbar_remove_task">Tác vụ đã bị xóa!</string>
+    <string name="snackbar_remove_task">Ghi chú đã bị xóa!</string>
     <string name="snackbar_undo">Hoàn tác</string>
     <string name="action_cancel">Hủy bỏ</string>
     <string name="action_delete">Xóa</string>
     <string name="dialog_title"><b>Bạn chắc chứ?</b></string>
-    <string name="dialog_message">Xóa tác vụ này?</string>
+    <string name="dialog_message">Xóa ghi chú này?</string>
 
     <string name="backup_create_dialog_message">Do you want to create new backup? \nThe previous backup file will be deleted</string>
     <string name="backup_create_dialog_button">Create backup</string>
@@ -86,9 +86,9 @@
     <string name="settings_permission_snackbar_button_settings">CÀI ĐẶT</string>
 
     <string name="general_notification_1">Bạn có</string>
-    <string name="general_notification_2">tác vụ hoạt động:</string>
-    <string name="general_notification_3">Các tác vụ hoạt động:</string>
-    <string name="general_notification_4">Các tác vụ hoạt động:</string>
+    <string name="general_notification_2">ghi chú hoạt động:</string>
+    <string name="general_notification_3">Các ghi chú hoạt động:</string>
+    <string name="general_notification_4">Các ghi chú hoạt động:</string>
 
     ////////////////<!-- "What's New?" page -->////////////////
     <string name="whats_new_title">What\'s New?</string>
