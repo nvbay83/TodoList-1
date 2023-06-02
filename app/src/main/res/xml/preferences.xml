@@ -9,7 +9,7 @@
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="general_notification"
-        android:summary="Hiển thị thông báo chung với danh sách tác vụ hiện tại của bạn"
+        android:summary="Hiển thị thông báo chung với danh sách ghi chú hiện tại của bạn"
         android:title="Bật thông báo chung" />
     <RingtonePreference
         android:defaultValue="content://settings/system/notification_sound"
