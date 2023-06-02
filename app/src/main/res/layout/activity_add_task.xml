@@ -135,7 +135,7 @@
         android:layout_marginBottom="16dp"
         android:background="@color/colorPrimary"
         android:foreground="?android:attr/selectableItemBackground"
-        android:text="Thêm tác vụ"
+        android:text="Thêm ghi chú"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold" />
