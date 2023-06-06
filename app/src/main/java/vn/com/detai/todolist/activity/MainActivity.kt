@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
         mContext = this@MainActivity
         mSearchViewIsOpen = false
         title = ""
-        mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager //Khởi tạo trình quản lý thông báo
 
         // Initialize ALARM_SERVICE
         AlarmHelper.getInstance().init(applicationContext)
@@ -119,9 +119,9 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
         }
         val touchHelper = ItemTouchHelper(callback)
         touchHelper.attachToRecyclerView(mRecyclerView)
-
+        
         mHelper = DBHelper.getInstance(mContext)
-        addTasksFromDB()
+        addTasksFromDB() //Add task vào RecyclerView
 
         // Show rate this app dialog
         AppRate.with(this).setInstallDays(0).setLaunchTimes(5).setRemindInterval(3).monitor()
@@ -164,17 +164,16 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
 //                Log.d(TAG, "isSearchOpen = $mSearchViewIsOpen")
 //            }
 //        })
-
+        // Sự kiện nhấn nút thêm ghi chú mới
         mFab.setOnClickListener { view ->
-            if (mPreferenceHelper.getBoolean(PreferenceHelper.ANIMATION_IS_ON)) {
+            if (mPreferenceHelper.getBoolean(PreferenceHelper.ANIMATION_IS_ON)) { 
                 CircularAnim.fullActivity(this@MainActivity, view)
                         .colorOrImageRes(R.color.colorPrimary)
                         .duration(300)
                         .go {
                             val intent = Intent(this@MainActivity, AddTaskActivity::class.java)
-
-                            // Method startActivityForResult(Intent, int) allows to get the right data (Title for RecyclerView item for example) from another activity.
-                            // To obtain data from the activity used onActivityResult(int, int, Intent) method that is called when the AddTaskActivity completes it's work.
+                            // Phương pháp startActivityForResult(Intent, int) cho phép lấy đúng dữ liệu
+                            // Dữ liệu được lấy từ hoạt động phương thức onActivityResult(int, int, Intent) sẽ được gọi khi AdđTaskActivity hoàn thành.
                             startActivityForResult(intent, 1)
                         }
             } else {
@@ -182,7 +181,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
                 startActivityForResult(intent, 1)
             }
         }
-
+        //Sự kiện trượt danh sách RecyclerView
         mRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
@@ -193,7 +192,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
                 }
             }
         })
-
+        
         if (mPreferenceHelper.getBoolean(PreferenceHelper.ANIMATION_IS_ON)) {
             mFab.visibility = View.GONE
 
@@ -206,9 +205,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
         }
     }
 
-    /**
-     * Finds tasks by the title in the database.
-     */
+   //Tìm các ghi chú trong database
     private fun findTasks(title: String) {
         mSearchViewIsOpen = true
         Log.d(TAG, "findTasks: SearchView Title = $title")
@@ -226,9 +223,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
         }
     }
 
-    /**
-     * Reads all tasks from the database and adds them to the RecyclerView list.
-     */
+   //Đọc tất cả ghi chú trong Database và thêm vào RecyclerView
     private fun addTasksFromDB() {
         mAdapter.removeAllTasks()
         val taskList = mHelper.getAllTasks()
@@ -241,6 +236,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
     /**
      * Starts the EmptyView animation.
      */
+     
     private fun startEmptyViewAnimation() {
         if (mAdapter.itemCount == 0 && mShowAnimation) {
             mSearchViewIsOpen = false
@@ -261,9 +257,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
         sendBroadcast(intent)
     }
 
-    /**
-     * Updates general notification data.
-     */
+   //Cập nhật thông báo mới
     private fun updateGeneralNotification() {
         if (mPreferenceHelper.getBoolean(PreferenceHelper.GENERAL_NOTIFICATION_IS_ON)) {
             if (mAdapter.itemCount != 0) {
@@ -276,9 +270,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
         }
     }
 
-    /**
-     * Set up and show general notification.
-     */
+   //Cài đặt và hiển thị thông báo
     private fun showGeneralNotification() {
         val stringBuilder = StringBuilder()
 
@@ -302,7 +294,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
             0, 5, 6, 7, 8, 9 -> notificationTitle = getString(R.string.general_notification_1) + " " + mAdapter.itemCount + " " + getString(R.string.general_notification_4)
         }
 
-        // Set NotificationChannel for Android Oreo
+        //Cài đặt kênh thông báo 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             val channel = NotificationChannel(AlarmReceiver.CHANNEL_ID, "SimpleToDo Notifications",
                     NotificationManager.IMPORTANCE_HIGH)
@@ -326,20 +318,17 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
         mNotificationManager.notify(1, notification)
     }
 
-    /**
-     * Removes general notification.
-     */
+    //Xóa thông báo
     private fun removeGeneralNotification() {
         mNotificationManager.cancel(1)
     }
 
-    /**
-     * Updates general notification data when user click the "Cancel" snackbar button.
-     */
+  
+     //Cập nhật dữ liệu thông báo khi người dùng nhấn "Cancel"
     override fun updateData() = updateGeneralNotification()
 
     override fun showFAB() = mFab.show()
-
+    
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu, menu)
 
@@ -348,7 +337,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
 
         return true
     }
-
+    //Nhấn vào bánh răng để chuyển sang Page Setting
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_settings) {
             val intent = Intent(this, SettingsActivity::class.java)
@@ -359,10 +348,9 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
     }
 
     /**
-     * Reads all tasks from the database and compares them with mTaskList in RecyclerView.
-     * If the tasks count in the database doesn't coincide with the number of tasks in RecyclerView,
-     * all the tasks in the database are replaced with tasks from the mTaskList.
-     * For example, this happens when the user removes the task from the RecyclerView list and hide/close app until the snackbar has disappeared.
+     * Đọc tất cả ghi chú từ database và so sánh với mTaskList trong RecyclerView
+     * Nếu số ghi chú trong database không giống với số ghi chú trong RecyclerView
+     * Tất cả các ghi chú trong database sẽ thay thế với tất cả các ghi chú trong mTaskList
      */
     override fun onStop() {
         super.onStop()
@@ -417,10 +405,9 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
     }
 
     /**
-     * Called when an activity you launched exits, giving you the requestCode you started it with, the resultCode it returned, and any additional data from it.
-     * requestCode: The integer request code originally supplied to startActivityForResult(), allowing you to identify who this result came from.
-     * resultCode: The integer result code returned by the child activity through its setResult().
-     * data: An Intent, which can return result data to the caller (various data can be attached to Intent "extras").
+     * Được gọi khi một hoạt động bạn đã khởi tạo kết thúc, cung cấp requestCode, resultCode và bất cứ dữ liệu nào từ hoạt động khởi tạo
+     * requestCode: cung cấp cho startActivityForResult(), cho phép xác định kết quả đến từ đâu
+     * resultCode: Được trả về bởi hoạt động con thông qua setResult()
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (data == null) return
