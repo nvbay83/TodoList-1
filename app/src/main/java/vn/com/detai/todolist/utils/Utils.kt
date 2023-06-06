@@ -3,7 +3,7 @@ package vn.com.detai.todolist.utils
 import java.text.SimpleDateFormat
 
 /**
- * Class to represent date in string format.
+ *Lớp để biểu diễn ngày ở định dạng String.
  */
 object Utils {
     private val mPreferenceHelper = PreferenceHelper.getInstance()
