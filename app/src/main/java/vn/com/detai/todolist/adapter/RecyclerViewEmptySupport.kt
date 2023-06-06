@@ -9,7 +9,7 @@ import vn.com.detai.R
 import vn.com.detai.todolist.activity.MainActivity
 
 /**
- * Adds the setEmptyView method for the RecyclerView.
+ * Thêm phương thức setEmptyView cho RecyclerView.
  */
 class RecyclerViewEmptySupport : RecyclerView {
 
@@ -29,7 +29,7 @@ class RecyclerViewEmptySupport : RecyclerView {
             checkIfEmpty()
         }
     }
-
+    
     fun checkIfEmpty() {
         if (mEmptyView != null && adapter != null && !MainActivity.mSearchViewIsOpen) {
             val emptyViewVisible = adapter.itemCount == 0
