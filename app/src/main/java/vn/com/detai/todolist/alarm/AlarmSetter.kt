@@ -10,7 +10,7 @@ import vn.com.detai.todolist.database.DBHelper
 import vn.com.detai.todolist.model.ModelTask
 
 /**
- * Class for restoring all notifications after device reboot.
+ * Lớp khôi phục tất cả các thông báo sau khi khởi động lại thiết bị.
  */
 class AlarmSetter : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
