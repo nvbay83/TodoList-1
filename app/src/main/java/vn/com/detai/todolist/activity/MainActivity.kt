@@ -82,7 +82,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
         title = ""
         mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager //Khởi tạo trình quản lý thông báo
 
-        // Initialize ALARM_SERVICE
+        // Khởi tạo ALARM_SERVICE
         AlarmHelper.getInstance().init(applicationContext)
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
