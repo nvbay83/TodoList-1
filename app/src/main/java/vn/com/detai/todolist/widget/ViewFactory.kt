@@ -18,22 +18,21 @@ import vn.com.detai.todolist.utils.Utils
 import java.util.*
 
 /**
- * Class that will fill the list with values.
- * It's methods are very similar to the standard adapter methods.
+ * Lớp sẽ điền vào danh sách các giá trị
  */
 class ViewFactory internal constructor(private val mContext: Context) : RemoteViewsService.RemoteViewsFactory {
 
     private lateinit var mListData: ArrayList<ModelTask>
 
     /**
-     * Called when factory is first constructed.
+     * Được gọi khi được build lần đầu
      */
     override fun onCreate() {
         mListData = ArrayList()
     }
 
     /**
-     * Called when notifyDataSetChanged() is triggered on the remote adapter.
+     * Được gọi khi notifyDataSetChanged() được kích hoạt trên adapter
      */
     override fun onDataSetChanged() {
         mListData.clear()
