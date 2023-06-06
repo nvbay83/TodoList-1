@@ -26,9 +26,7 @@ import kotlinx.android.synthetic.main.activity_add_task.*
 import kotterknife.bindView
 import java.util.*
 
-/**
- * Activity for adding a new task to RecyclerView.
- */
+//Hoạt động để thêm tác vụ mới vào RecyclerView.
 class AddTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
     private val mTitle: EditText by bindView(R.id.taskTitle)
@@ -49,6 +47,7 @@ class AddTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         if (toolbar != null) {
+            //cấu hình cho toolbar
             setSupportActionBar(toolbar)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
             supportActionBar!!.setHomeAsUpIndicator(R.drawable.ic_close_white_24dp)
@@ -71,7 +70,7 @@ class AddTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         }
 
         mReminderLayout.visibility = View.INVISIBLE
-
+        //sự kiện nhấn switch để hiện thị ReminderLayout 
         mReminderSwitch.setOnClickListener {
             if (mReminderSwitch.isChecked) {
                 hideKeyboard(mTitle)
@@ -117,9 +116,9 @@ class AddTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
 
         container.setOnClickListener { hideKeyboard(mTitle) }
-
+        
         mCalendar = Calendar.getInstance()
-        // If the user specified only the date (without time), then the notification of the event will appear in an hour.
+        //Nếu người dùng chỉ chọn ngày mà không chọn giờ. thì thông báo sự kiệh sẽ xuất hiện sau một giờ
         mCalendar.set(Calendar.HOUR_OF_DAY, mCalendar.get(Calendar.HOUR_OF_DAY) + 1)
 
         mDate.setOnClickListener {
@@ -133,19 +132,23 @@ class AddTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
             val timePickerFragment = TimePickerFragment()
             timePickerFragment.show(fragmentManager, "TimePickerFragment")
         }
-
+        //sự kiện nhấn nút thêm ghi chú mới
         addTaskButton.setOnClickListener {
             when {
                 mTitle.length() == 0 -> mTitle.error = getString(R.string.error_text_input)
                 mTitle.text.toString().trim { it <= ' ' }.isEmpty() -> mTitle.error = getString(R.string.error_spaces)
                 else -> {
+                    // Tạo một Intent mới để chứa dữ liệu trả về
                     val intent = Intent()
+                    // Truyền data vào intent
                     intent.putExtra("title", mTitle.text.toString())
-
                     if (mDate.length() != 0 || mTime.length() != 0) {
                         intent.putExtra("date", mCalendar.timeInMillis)
                     }
+                    // Đặt resultCode là Activity.RESULT_OK to
+                    // thể hiện đã thành công và có chứa kết quả trả về
                     setResult(RESULT_OK, intent)
+                    // gọi hàm finish() để đóng Activity hiện tại và trở về MainActivity.
                     finish()
                 }
             }
@@ -153,25 +156,19 @@ class AddTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         }
     }
 
-    /**
-     * Method for hiding the soft keyboard.
-     */
+    //Phương pháp ẩn bàn phím
     private fun hideKeyboard(editText: EditText) {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(editText.windowToken, 0)
     }
 
-    /**
-     * Hides the soft keyboard when the user clicks on the home button.
-     */
+    //Ẩn bàn phìm khi người dúng ấn nút Home
     override fun onStop() {
         super.onStop()
         hideKeyboard(mTitle)
     }
 
-    /**
-     * The handler for clicking the close button in the toolbar.
-     */
+     //Trình xử lý để nhấp vào nút đóng trên Toolbar.
     override fun onOptionsItemSelected(item: MenuItem) =
         if (item.itemId == android.R.id.home) {
             hideKeyboard(mTitle)
@@ -179,9 +176,7 @@ class AddTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
             true
         } else false
 
-    /**
-     * Sets the date selected in the DatePickerFragment.
-     */
+    //Đặt ngày đã chọn trong DatePickerFragment.
     override fun onDateSet(datePicker: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int) {
         mCalendar.set(Calendar.YEAR, year)
         mCalendar.set(Calendar.MONTH, monthOfYear)
@@ -189,9 +184,7 @@ class AddTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener,
         mDate.setText(Utils.getDate(mCalendar.timeInMillis))
     }
 
-    /**
-     * Sets the time selected in the TimePickerFragment.
-     */
+    //Đặt thời gian đã chọn trong TimePickerFragment
     override fun onTimeSet(timePicker: TimePicker, hourOfDay: Int, minute: Int) {
         mCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
         mCalendar.set(Calendar.MINUTE, minute)
