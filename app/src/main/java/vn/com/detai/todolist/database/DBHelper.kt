@@ -10,7 +10,7 @@ import vn.com.detai.todolist.model.ModelTask
 import java.util.*
 
 /**
- * Class for managing the SQLite database (uses the Singleton pattern).
+ * Lớp quản lý cơ sở dữ liệu SQLite
  */
 class DBHelper private constructor(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -24,7 +24,7 @@ class DBHelper private constructor(context: Context) : SQLiteOpenHelper(context,
     }
 
     /**
-     * Saves a specific task to the database.
+     * Lưu ghi chú cụ thể vào database
      */
     fun saveTask(task: ModelTask): Long {
         val db = writableDatabase
@@ -44,7 +44,7 @@ class DBHelper private constructor(context: Context) : SQLiteOpenHelper(context,
     }
 
     /**
-     * Updates the task title and date in the database.
+     * Cập nhật tiêu đề ghi chú và ngày vào database
      */
     fun updateTask(task: ModelTask) {
         val updatedValues = ContentValues()
@@ -56,7 +56,7 @@ class DBHelper private constructor(context: Context) : SQLiteOpenHelper(context,
     }
 
     /**
-     * Gets a specific task from the database.
+     * Lấy ghi chú cụ thể từ database
      */
     fun getTask(id: Long): ModelTask {
         lateinit var task: ModelTask
@@ -81,7 +81,7 @@ class DBHelper private constructor(context: Context) : SQLiteOpenHelper(context,
     }
 
     /**
-     * Removes a specific task from the database.
+     * Xóa ghi chú cụ thể trong database
      */
     fun deleteTask(id: Long) {
         val db = writableDatabase
@@ -92,7 +92,7 @@ class DBHelper private constructor(context: Context) : SQLiteOpenHelper(context,
     }
 
     /**
-     * Gets all tasks from the database.
+     * Lấy tất cả tác vụ trong database
      */
     fun getAllTasks(): List<ModelTask> {
         val tasksList = ArrayList<ModelTask>()
@@ -126,7 +126,7 @@ class DBHelper private constructor(context: Context) : SQLiteOpenHelper(context,
     }
 
     /**
-     * Removes all tasks from the database.
+     * Xóa tất cả ghi chú trong database
      */
     fun deleteAllTasks() {
         val db = writableDatabase
@@ -135,7 +135,7 @@ class DBHelper private constructor(context: Context) : SQLiteOpenHelper(context,
     }
 
     /**
-     * Updates the task position in the database.
+     * Cập nhật vị trí ghi chú trong database
      */
     fun updateTaskPosition(task: ModelTask) {
         val updatedValues = ContentValues()
@@ -146,7 +146,7 @@ class DBHelper private constructor(context: Context) : SQLiteOpenHelper(context,
     }
 
     /**
-     * Gets a specific tasks for searching by title.
+     * Lấy ghi chú cụ thể được tìm kiếm bởi tiêu đề
      */
     fun getTasksForSearch(selection: String, selectionArgs: Array<String>, orderBy: String): List<ModelTask> {
         val tasks = ArrayList<ModelTask>()
