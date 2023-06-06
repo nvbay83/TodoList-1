@@ -11,7 +11,7 @@ import vn.com.detai.todolist.model.ModelTask
 import android.content.Context.NOTIFICATION_SERVICE
 
 /**
- * Class for initializing alarm service (uses the Singleton pattern).
+ * Lớp khởi tạo dịch vụ báo động
  */
 class AlarmHelper private constructor() {
 
@@ -19,7 +19,7 @@ class AlarmHelper private constructor() {
     private lateinit var mAlarmManager: AlarmManager
 
     /**
-     * Alarm service initialization.
+     * Khởi tạo dịch vụ báo động
      */
     fun init(context: Context) {
         this.mContext = context
@@ -27,7 +27,7 @@ class AlarmHelper private constructor() {
     }
 
     /**
-     * Passes the required data to the AlarmReceiver to create a notification.
+     * Truyền dữ liệu cần thiết tới AlarmReceiver để tạo thông báo.
      */
     fun setAlarm(task: ModelTask) {
         val intent = Intent(mContext, AlarmReceiver::class.java)
@@ -40,7 +40,7 @@ class AlarmHelper private constructor() {
     }
 
     /**
-     * Removes notification by id (timeStamp).
+     * Xóa thông báo theo id (timeStamp).
      */
     fun removeNotification(taskTimeStamp: Long, context: Context) {
         val notificationManager = context.getSystemService(NOTIFICATION_SERVICE) as NotificationManager
@@ -48,7 +48,7 @@ class AlarmHelper private constructor() {
     }
 
     /**
-     * Removes alarm by id (timeStamp).
+     * Xóa báo thức theo id (timeStamp).
      */
     fun removeAlarm(taskTimeStamp: Long) {
         val intent = Intent(mContext, AlarmReceiver::class.java)
@@ -64,7 +64,7 @@ class AlarmHelper private constructor() {
         private var mInstance: AlarmHelper? = null
 
         /**
-         * This static method ensures that only one AlarmHelper will ever exist at any given time.
+         * Phương thức đảm bảo rằng chỉ có một AlarmHelper tồn tại tại bất kỳ thời điểm nào.
          */
         fun getInstance(): AlarmHelper {
             if (mInstance == null) {
