@@ -195,9 +195,9 @@ class DBHelper private constructor(context: Context) : SQLiteOpenHelper(context,
         const val SELECTION_LIKE_TITLE = "$TASK_TITLE_COLUMN LIKE ?"
 
         /**
-         * This static method ensures that only one DBHelper will ever exist at any given time.
-         * If the mInstance object has not been initialized, one will be created.
-         * If one has already been created then it will simply be returned.
+         * Phương thức đảm bảo rằng chỉ có một DBHelper tồn tại tại bất kỳ thời điểm nào.
+         * Nếu đối tượng mInstance chưa được khởi tạo, một đối tượng sẽ được tạo.
+         * Nếu một cái đã được tạo thì nó sẽ được trả lại.
          */
         @Synchronized
         fun getInstance(context: Context): DBHelper {
