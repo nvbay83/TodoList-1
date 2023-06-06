@@ -27,7 +27,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val title = intent.getStringExtra("title")
         val timeStamp = intent.getLongExtra("time_stamp", 0).toInt()
 
-        // Intent to launch the application when you click on notification
+        // Intent khởi chạy ứng dụng khi bạn nhấp vào thông báo
         var resultIntent = Intent(context, MainActivity::class.java)
 
         if (MyApplication.isActivityVisible) {
