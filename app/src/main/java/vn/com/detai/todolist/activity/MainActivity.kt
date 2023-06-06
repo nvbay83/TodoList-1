@@ -90,7 +90,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
             toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
             setSupportActionBar(toolbar)
         }
-
+        //Khởi tạo các cài đặt của ứng dụng
         PreferenceHelper.getInstance().init(applicationContext)
         mPreferenceHelper = PreferenceHelper.getInstance()
 
@@ -192,7 +192,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
                 }
             }
         })
-        
+        // Kiểm tra hiệu ứng tắt mở của nút thêm ghi chú mới
         if (mPreferenceHelper.getBoolean(PreferenceHelper.ANIMATION_IS_ON)) {
             mFab.visibility = View.GONE
 
@@ -234,7 +234,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
     }
 
     /**
-     * Starts the EmptyView animation.
+     * Bắt đầu hiệu ứng EmptyView
      */
      
     private fun startEmptyViewAnimation() {
@@ -245,7 +245,7 @@ class MainActivity : AppCompatActivity(), RecyclerViewAdapter.AdapterCallback {
     }
 
     /**
-     * Updates widget data.
+     * Cập nhật widget data
      */
     private fun updateWidget() {
         Log.d(TAG, "WIDGET IS UPDATED!")
