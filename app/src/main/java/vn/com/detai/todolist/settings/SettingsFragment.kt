@@ -20,7 +20,7 @@ import vn.com.detai.todolist.utils.BackupHelper
 import vn.com.detai.todolist.utils.PreferenceHelper
 
 /**
- * Fragment which contains the settings information.
+ * Chứa thông tin cài đặt
  */
 class SettingsFragment : PreferenceFragment() {
 
