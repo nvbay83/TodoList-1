@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 
 /**
- * Class that helps to manage SharedPreferences data (uses the Singleton pattern).
+ * Lớp giúp quản lý dữ liệu SharedPreferences
  */
 class PreferenceHelper private constructor() {
 
