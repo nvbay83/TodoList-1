@@ -19,7 +19,7 @@ import vn.com.detai.todolist.activity.MainActivity
 import vn.com.detai.todolist.utils.MyApplication
 
 /**
- * Class for setting notifications.
+ * Lớp cài đặt thông báo.
  */
 class AlarmReceiver : BroadcastReceiver() {
 
@@ -42,7 +42,7 @@ class AlarmReceiver : BroadcastReceiver() {
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
         val ringtonePath = preferences.getString("notification_sound", "")
 
-        // Set NotificationChannel for Android Oreo
+        // Cài đặt kênh thông báo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             val channel = NotificationChannel(CHANNEL_ID, "SimpleToDo Notifications",
                     NotificationManager.IMPORTANCE_HIGH)
@@ -52,7 +52,7 @@ class AlarmReceiver : BroadcastReceiver() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        // Customize and create notifications
+        // Tùy chỉnh và tạo thông báo
         val builder = NotificationCompat.Builder(context, CHANNEL_ID)
         if (ringtonePath != "") {
             if (SDK_INT >= LOLLIPOP) {
