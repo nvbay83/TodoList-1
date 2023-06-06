@@ -15,7 +15,7 @@ import vn.com.detai.R
 import vn.com.detai.todolist.widget.WidgetProvider
 
 /**
- * Activity which contains SettingsFragment.
+ * Hoạt động chứa SettingsFragment.
  */
 class SettingsActivity : AppCompatActivity() {
 
