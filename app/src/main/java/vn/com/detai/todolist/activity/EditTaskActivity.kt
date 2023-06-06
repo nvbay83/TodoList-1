@@ -74,7 +74,7 @@ class EditTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         MainActivity.mActivityIsShown = true
         mContext = applicationContext
 
-        // Get the resolution of the user's screen
+        // Nhận độ phân giải màn hình của người dùng
         val displayMetrics = DisplayMetrics()
         (this.getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.getMetrics(displayMetrics)
         val width = displayMetrics.widthPixels
@@ -87,7 +87,7 @@ class EditTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
             taskTimeLayout.layoutParams.width = 150
         }
 
-        // Get Intent data
+        // Nhận dữ liệu intent
         mId = intent.getLongExtra("id", 0)
         val title = intent.getStringExtra("title")
         mDate = intent.getLongExtra("date", 0)
@@ -105,7 +105,7 @@ class EditTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
             mTimeEditText.setText(Utils.getTime(mDate))
         }
         addTaskButton.text = getString(R.string.update_task)
-
+        
         if (mDate == 0L) {
             mReminderLayout.visibility = View.INVISIBLE
             mReminderSwitch.isChecked = false
@@ -115,7 +115,7 @@ class EditTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
             mReminderLayout.visibility = View.VISIBLE
             mReminderSwitch.isChecked = true
         }
-
+        //Sự kiện nhất switch để hiển thị ReminderLayout
         mReminderSwitch.setOnClickListener {
             if (mReminderSwitch.isChecked) {
                 hideKeyboard(mTitle)
@@ -166,7 +166,7 @@ class EditTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         if (mDateEditText.length() != 0 || mTimeEditText.length() != 0) {
             mCalendar.timeInMillis = mDate
         }
-        // If the user specified only the date (without time), then the notification of the event will appear in an hour.
+        // Nếu người dùng chỉ chỉ định ngày (không có thời gian), thì thông báo về sự kiện sẽ xuất hiện sau một giờ.
         if (mTimeEditText.length() == 0) {
             mCalendar.set(Calendar.HOUR_OF_DAY, mCalendar.get(Calendar.HOUR_OF_DAY) + 1)
         }
@@ -182,7 +182,7 @@ class EditTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
             val timePickerFragment = TimePickerFragment()
             timePickerFragment.show(fragmentManager, "TimePickerFragment")
         }
-
+        //sự kiện nhấn nút cập nhật ghi chú
         addTaskButton.setOnClickListener {
             when {
                 mTitle.length() == 0 -> mTitle.error = getString(R.string.error_text_input)
@@ -221,17 +221,13 @@ class EditTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         }
     }
 
-    /**
-     * Hides the soft keyboard when the user clicks on the home button.
-     */
+    //Ẩn bàn phím mềm khi người dùng nhấp vào nút home
     override fun onStop() {
         super.onStop()
         hideKeyboard(mTitle)
     }
 
-    /**
-     * Method for hiding the soft keyboard.
-     */
+    // Ẩn bàn phím
     private fun hideKeyboard(editText: EditText?) {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(editText!!.windowToken, 0)
@@ -242,9 +238,7 @@ class EditTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         return true
     }
 
-    /**
-     * The handler for clicking the close button in the toolbar.
-     */
+    // Trình xử lý để nhấp vào nút đóng trên toolbar
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         when (item.itemId) {
@@ -275,9 +269,7 @@ class EditTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         return super.onOptionsItemSelected(item)
     }
 
-    /**
-     * Sets the date selected in the DatePickerFragment.
-     */
+    //Đặt ngày đã chọn trong DatePickerFragment
     override fun onDateSet(datePicker: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int) {
         mCalendar.set(Calendar.YEAR, year)
         mCalendar.set(Calendar.MONTH, monthOfYear)
@@ -285,9 +277,7 @@ class EditTaskActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener
         mDateEditText.setText(Utils.getDate(mCalendar.timeInMillis))
     }
 
-    /**
-     * Sets the time selected in the TimePickerFragment.
-     */
+    //Đặt thời gian đã chọn trong TimePickerFragment.
     override fun onTimeSet(timePicker: TimePicker, hourOfDay: Int, minute: Int) {
         mCalendar.set(Calendar.HOUR_OF_DAY, hourOfDay)
         mCalendar.set(Calendar.MINUTE, minute)
