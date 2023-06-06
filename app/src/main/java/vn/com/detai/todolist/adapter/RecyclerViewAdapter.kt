@@ -34,7 +34,7 @@ class RecyclerViewAdapter private constructor() : RecyclerViewEmptySupport.Empty
     private var mCancelButtonIsClicked: Boolean = true
 
     /**
-     * Callback for update general notification data and show FAB from another class.
+     * Gọi để cập nhật thông báo dữ liệu và show FAB từ lớp khác
      */
     interface AdapterCallback {
         fun updateData()
@@ -42,14 +42,14 @@ class RecyclerViewAdapter private constructor() : RecyclerViewEmptySupport.Empty
     }
 
     /**
-     * Registers callback from another class.
+     * Đăng ký gọi lại từ một lớp khác.
      */
     fun registerCallback(callback: AdapterCallback) {
         mCallback = callback
     }
 
     /**
-     * Adds a new item to the end of the list.
+     * Thêm một item mới vào cuối danh sách
      */
     fun addTask(item: ModelTask) {
         mTaskList.add(item)
@@ -59,7 +59,7 @@ class RecyclerViewAdapter private constructor() : RecyclerViewEmptySupport.Empty
     }
 
     /**
-     * Adds a new item to the specific position of the list.
+     * Thêm một item mới vào vị trí cụ thể trong danh sách
      */
     fun addTask(item: ModelTask, position: Int) {
         mTaskList.add(position, item)
@@ -69,7 +69,7 @@ class RecyclerViewAdapter private constructor() : RecyclerViewEmptySupport.Empty
     }
 
     /**
-     * Updates the data of the specific item in the list.
+     * Cập nhật data item cụ thể trong danh sách
      */
     fun updateTask(updatedTask: ModelTask, position: Int) {
         mTaskList[position] = updatedTask
@@ -79,7 +79,7 @@ class RecyclerViewAdapter private constructor() : RecyclerViewEmptySupport.Empty
     }
 
     /**
-     * Removes an item from the list (with Snackbar).
+     * xóa item ra khỏi danh sách với Snackbar
      */
     fun removeTask(position: Int, recyclerView: RecyclerView) {
         val taskID = mTaskList[position].id
@@ -127,7 +127,7 @@ class RecyclerViewAdapter private constructor() : RecyclerViewEmptySupport.Empty
     }
 
     /**
-     * Removes an item from the list (without Snackbar).
+     * Xóa item ra khỏi danh sách 
      */
     fun removeTask(position: Int) {
         val taskID = mTaskList[position].id
@@ -146,7 +146,7 @@ class RecyclerViewAdapter private constructor() : RecyclerViewEmptySupport.Empty
     }
 
     /**
-     * Removes all items from the list.
+     * xóa tất cả item ra khỏi danh sách
      */
     fun removeAllTasks() {
         if (itemCount != 0) {
@@ -156,7 +156,7 @@ class RecyclerViewAdapter private constructor() : RecyclerViewEmptySupport.Empty
     }
 
     /**
-     * Moves an item in the list.
+     * di chuyển một item trong danh sách
      */
     fun moveTask(fromPosition: Int, toPosition: Int) {
         Log.d(TAG, "fromPosition: $fromPosition toPosition: $toPosition")
@@ -187,7 +187,7 @@ class RecyclerViewAdapter private constructor() : RecyclerViewEmptySupport.Empty
     }
 
     /**
-     * Saves the new tasks order from RecyclerView list to the database.
+     * Lưu thứ tự ghi chú mới từ danh sách RecyclerView vào cơ sở dữ liệu.
      */
     private fun saveTasksOrderFromRV() {
         for (task in mTaskList) {
@@ -199,7 +199,7 @@ class RecyclerViewAdapter private constructor() : RecyclerViewEmptySupport.Empty
     }
 
     /**
-     * Saves the new tasks order to the database.
+     * Lưu thứ tự ghi chú mới vào cơ sở dữ liệu.
      */
     private fun saveTasksOrderFromDB() {
         val taskList = mHelper.getAllTasks()
@@ -211,7 +211,7 @@ class RecyclerViewAdapter private constructor() : RecyclerViewEmptySupport.Empty
             order.execute(task)
         }
     }
-
+    
     fun reloadTasks() {
         val backupList = ArrayList<ModelTask>()
         backupList.addAll(mTaskList)
@@ -223,9 +223,9 @@ class RecyclerViewAdapter private constructor() : RecyclerViewEmptySupport.Empty
     }
 
     /**
-     * Called when RecyclerView needs a new RecyclerView.ViewHolder of the given type to represent an item
-     * parent: The ViewGroup into which the new View will be added after it is bound to an adapter position
-     * viewType: The view type of the new View.
+     * Được gọi khi RecyclerView cần một RecyclerView.ViewHolder mới của loại đã cho để đại diện cho một item
+     * parent:  Chế độ xem mới sẽ được thêm vào sau khi chế độ này được liên kết với vị trí bộ điều hợp
+     * viewType: Loại chế độ xem của view mới
      */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.model_task, parent, false)
@@ -239,9 +239,9 @@ class RecyclerViewAdapter private constructor() : RecyclerViewEmptySupport.Empty
     }
 
     /**
-     * Called by RecyclerView to display the data at the specified position
-     * holder: The ViewHolder which should be updated to represent the contents of the item at the given position in the data set
-     * position: The position of the item within the adapter's data set.
+     * Được gọi bởi RecyclerView để hiển thị dữ liệu ở vị trí đã chỉ định 
+     * holder: ViewHolder cần được cập nhật để thể hiện nội dung của item tại vị trí nhất định trong tập dữ liệu
+     * position: Vị trí của item trong tập dữ liệu của bộ điều hợp.
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val task = mTaskList[position]
@@ -310,12 +310,12 @@ class RecyclerViewAdapter private constructor() : RecyclerViewEmptySupport.Empty
     }
 
     /**
-     * Returns the total number of items in the data set held by the adapter.
+     * Trả về tổng số item trong tập dữ liệu của adapter
      */
     override fun getItemCount() = mTaskList.size
 
     /**
-     * This class helps to get a reference to each element of a particular list item.
+     * Lớp này giúp lấy tham chiếu đến từng phần tử của danh sách item cụ thể.
      */
     inner class TaskViewHolder internal constructor(itemView: View, internal var title: TextView, internal var date: TextView) : RecyclerView.ViewHolder(itemView)
 
@@ -325,7 +325,7 @@ class RecyclerViewAdapter private constructor() : RecyclerViewEmptySupport.Empty
         var mTaskList: MutableList<ModelTask> = ArrayList()
 
         /**
-         * This static method ensures that only one RecyclerViewAdapter will ever exist at any given time.
+         * Phương thức tĩnh này đảm bảo rằng chỉ có một RecyclerViewAdapter tồn tại tại bất kỳ thời điểm nào.
          */
         fun getInstance(): RecyclerViewAdapter {
             if (mInstance == null) {
